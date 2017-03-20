@@ -12,9 +12,15 @@ class Bubulle {
 
 void draw(){
   dessiner();
-  bouger();
+  //bouger();
 }
 
-
+void dessiner(){
+ // translate(x,y);
+  fill(couleur);
+  ellipse (x, y, taille, taille);
+  
+  
+}
 
 }
