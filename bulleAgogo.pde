@@ -1,5 +1,5 @@
 Bubulle[] bubulles = new Bubulle[20];
-
+frameRate(4);
 void setup() {
 noStroke();
   size(500,500);
@@ -17,7 +17,7 @@ noStroke();
 
 void draw() {
 
-  background(0);
+  background(255);
 
   for(int i=0; i < bubulles.length; i++) {
     bubulles[i].draw();
