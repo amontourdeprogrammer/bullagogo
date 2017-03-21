@@ -1,37 +1,42 @@
-class Bubulle {
-
+class Balle {
+ //Déclaration des paramètres de base de la balle
+  float x;
+  float y;
+  float vitesseX;
+  float vitesseY;
   color couleur;
-  float x, y, taille;
 
-  Bubulle(float depart_x, float depart_y, float t) {
-    x = depart_x;
-    y = depart_y;
-    taille = t;
-    couleur = color(random(255), 230, 255); // hue, saturation, brightness
-  }
-void draw(){
-  dessiner();
-  bouger();
-}
+  //Constructeur de la balle
+  Balle (float nouvX, float nouvY, color nouvCouleur) {
+    x      = nouvX;
+    y      = nouvY;
+    couleur    = nouvCouleur;
 
-void bouger() {
-      // bouger al�atoirement en fonction de sa taille
-      x += random(-taille,taille);
-      y += random(-taille,taille);
-      // boucler sur les bords du Sketch
-      if (x > width + taille) x = -taille;
-      if (x < -taille) x = width + taille;
-      if (y > height + taille) y = -taille;
-      if (y < -taille) y = height + taille;
+    vitesseX = 2+ random(-1,1);
+    vitesseY = 2+ random(-1,1);
   }
 
-void dessiner(){
- // translate(x,y);
-  fill(couleur);
-  ellipse (x, y, taille, taille);
-  fill(255);
-  ellipse (x, y, taille/3, taille/3);
+  //Dessin de la balle
+  void display() {
+    fill(couleur);
+    ellipse(x, y, 8, 8);
+  }
+
+  //Déplacement de la balle
+  void bouge() {
+    x = x + vitesseX;
+    y = y + vitesseY;
+  }
+
+  void testCollision() {
+    //Si la balle touche un mur, elle rebondit
+    if (x > width-8 || x < 8) {
+       vitesseX = vitesseX * -1;
+    }
+    if (y > height-8 || y < 8) {
+       vitesseY = vitesseY * -1;
+    }
+  }
   
-  
-}
+ 
 }

@@ -1,26 +1,36 @@
-Bubulle[] bubulles = new Bubulle[20];
-frameRate(4);
-void setup() {
-noStroke();
-  size(500,500);
-  colorMode(HSB);      
-  smooth();            
+//Déclaration d'une variable contenant le nombre de balles
+int nbreBalle = 10;
+ 
 
-  // pour chaque objet, choisir une taille &position de depart
-  for(int i=0; i < bubulles.length; i++) {
-    float taille = random(20,60);
-    float depart_x = random(width);
-    float depart_y = random(height);
-    bubulles[i] = new Bubulle(depart_x, depart_y, taille);
+
+//Déclaration d'une liste d'instances de l'objet Balle
+Balle[] balles = new Balle[nbreBalle];
+
+void setup() {
+  smooth(); //Lissage des dessins
+  size(800, 600); //Taille de la fenêtre
+
+  //Cette boucle va créer trois balles blanches
+  //au centre de l'écran
+  for (int i = 0; i < nbreBalle; i++) {
+    balles[i] = new Balle(width/2, height/2,  color(240));
+   
   }
 }
 
 void draw() {
+  fill(12, 12, 12, 122); // Couleur avec transparence.
+  rect(0, 0, width, height);
 
-  background(255);
+  noStroke();
 
-  for(int i=0; i < bubulles.length; i++) {
-    bubulles[i].draw();
+  //Cette boucle va déplacer et afficher les trois balles
+  for (int i = 0; i < nbreBalle; i++) {
+    balles[i].bouge();
+    balles[i].testCollision();
+    balles[i].display();
   }
-
+  
+  
+ 
 }
