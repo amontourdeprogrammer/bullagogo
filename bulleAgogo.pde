@@ -1,5 +1,5 @@
 //Déclaration d'une variable contenant le nombre de balles
-int nbreBubulle = 10;
+int nbreBubulle = 100;
 float positionX;
 float positionY;
 
@@ -31,13 +31,38 @@ void draw() {
     bubulles[i].testCollision();
     bubulles[i].display();
   }
-  
-    if (mousePressed){
-        for (int i = 0; i < nbreBubulle; i++) {
 
-          bubulles[i] = new Bubulle(width/2, height/2,  color(240));
-
+  for (int i = 0; i < nbreBubulle; i++) {
+    for (int j = 0; j < nbreBubulle; j++) {
+    
+      if(i != j && bubulles[i].x == bubulles[j].x && bubulles[i].y == bubulles[j].y) {
+        //explosion
+        explosion();
+      }
     }
-    }
+  }
  
+ 
+
+
+
+
+ if (mousePressed){
+for (int i = 0; i < nbreBubulle; i++) {
+
+          bubulles[i] = new Bubulle(mouseX, mouseY,  color(random(111),121,231) );
+          
+}
+ }
+          
+          
+          
+          }
+          
+          void explosion() {
+  for (int i = 0; i < nbreBubulle; i++) {
+
+          bubulles[i] = new Bubulle(mouseX, mouseY,  color(random(111),121,231) );
+
+    }
 }
