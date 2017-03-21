@@ -1,4 +1,4 @@
-class Balle {
+class Bubulle {
  //Déclaration des paramètres de base de la balle
   float x;
   float y;
@@ -7,7 +7,7 @@ class Balle {
   color couleur;
 
   //Constructeur de la balle
-  Balle (float nouvX, float nouvY, color nouvCouleur) {
+  Bubulle (float nouvX, float nouvY, color nouvCouleur) {
     x      = nouvX;
     y      = nouvY;
     couleur    = nouvCouleur;
@@ -36,7 +36,10 @@ class Balle {
     if (y > height-8 || y < 8) {
        vitesseY = vitesseY * -1;
     }
+    
+  
   }
+
   
  
 }
