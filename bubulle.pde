@@ -5,13 +5,14 @@ class Bubulle {
 	float vitesseX;
 	float vitesseY;
 	color couleur;
-	int size = 255;
+	int radius;
 
 	//Constructeur de la balle
-	Bubulle (float nouvX, float nouvY, color nouvCouleur) {
+	Bubulle (float nouvX, float nouvY, color nouvCouleur, int nouvRadius) {
 		x = nouvX;
 		y = nouvY;
 		couleur = nouvCouleur;
+		radius =  nouvRadius;
 
 		vitesseX = 2+ random(-1,1);
 		vitesseY = 2+ random(-1,1);
@@ -20,7 +21,7 @@ class Bubulle {
 	//Dessin de la balle
 	void display() {
 		fill(couleur);
-		ellipse(x, y, size, size);
+		ellipse(x, y, radius, radius);
 	}
 
 	//Déplacement de la balle
@@ -31,16 +32,11 @@ class Bubulle {
 
 	void testCollision() {
 		//Si la balle touche un mur, elle rebondit
-		if (x > width-8 || x < 8) {
+		if (x > width-radius/2 || x <  radius/2) {
 			vitesseX = vitesseX * -1;
 		}
-		if (y > height-8 || y < 8) {
+		if (y > height-radius/2 || y < radius/2) {
 			vitesseY = vitesseY * -1;
 		}
-
-
 	}
-
-
-
 }

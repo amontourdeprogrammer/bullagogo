@@ -2,7 +2,7 @@
 int nbreBubulle = 2;
 float positionX;
 float positionY;
-
+int radius = 255;
 
 //Déclaration d'une liste d'instances de l'objet Balle
 Bubulle[] bubulles = new Bubulle[nbreBubulle];
@@ -14,7 +14,7 @@ void setup() {
 	//Cette boucle va créer trois balles blanches
 	//au centre de l'écran
 	for (int i = 0; i < nbreBubulle; i++) {
-		bubulles[i] = new Bubulle(random(width/2), random(height/2),  color(240));
+		bubulles[i] = new Bubulle(random(radius, width/2), random(radius, height/2),  color(240), radius);
 	}
 }
 
@@ -49,19 +49,17 @@ void draw() {
 	if (mousePressed){
 		for (int i = 0; i < nbreBubulle; i++) {
 
-			bubulles[i] = new Bubulle(mouseX, mouseY,  color(random(111),121,231) );
+			bubulles[i] = new Bubulle(mouseX, mouseY,  color(random(111),121,231), radius );
 
 		}
 	}
-
-
 
 }
 
 void explosion() {
 	for (int i = 0; i < nbreBubulle; i++) {
 
-		bubulles[i] = new Bubulle(mouseX, mouseY,  color(random(111),121,231) );
+		bubulles[i] = new Bubulle(mouseX, mouseY,  color(random(111),121,231), radius );
 
 	}
 }
