@@ -14,7 +14,7 @@ void setup() {
 	//Cette boucle va créer trois balles blanches
 	//au centre de l'écran
 	for (int i = 0; i < nbreBubulle; i++) {
-		bubulles[i] = new Bubulle(random(radius, width/2), random(radius, height/2),  color(240), radius);
+		bubulles[i] = new Bubulle(radius + 100*i, radius + 100*i,  color(240), radius);
 	}
 }
 
@@ -30,36 +30,24 @@ void draw() {
 		bubulles[i].testCollision();
 		bubulles[i].display();
 	}
-
-	for (int i = 0; i < nbreBubulle; i++) {
-		for (int j = 0; j < nbreBubulle; j++) {
-
-			if(i != j && bubulles[i].x == bubulles[j].x && bubulles[i].y == bubulles[j].y) {
-				//explosion
+  
+  for (int i = 0; i < nbreBubulle; i++) {
+		for (int j = i + 1; j < nbreBubulle; j++) {
+      float space = dist(bubulles[i].x, bubulles[i].y, bubulles[j].x, bubulles[j].y);
+			if(space < radius/2) {
 				explosion();
 			}
 		}
 	}
 
-
-
-
-
-
 	if (mousePressed){
-		for (int i = 0; i < nbreBubulle; i++) {
-
-			bubulles[i] = new Bubulle(mouseX, mouseY,  color(random(111),121,231), radius );
-
-		}
+		explosion();
 	}
 
 }
 
 void explosion() {
 	for (int i = 0; i < nbreBubulle; i++) {
-
-		bubulles[i] = new Bubulle(mouseX, mouseY,  color(random(111),121,231), radius );
-
+		bubulles[i] = new Bubulle(radius + 100*i, radius + 100*i,  color(random(0, 255),random(0, 255),random(0, 255)), radius);
 	}
 }

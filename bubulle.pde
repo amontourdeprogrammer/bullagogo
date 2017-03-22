@@ -1,6 +1,6 @@
 class Bubulle {
 	//Déclaration des paramètres de base de la balle
-	public float x;
+	float x;
 	float y;
 	float vitesseX;
 	float vitesseY;
