@@ -5,10 +5,10 @@ class Bubble {
   float radius;
   boolean exploded;
 
-  Bubble (float newX, float newY, color newcolour, float newRadius) {
+  Bubble (float newX, float newY, color newColour, float newRadius) {
     x = newX;
     y = newY;
-    colour = newcolour;
+    colour = newColour;
     radius =  newRadius;
     speedX = SPEED;
     speedY = SPEED;
@@ -16,7 +16,8 @@ class Bubble {
   }
 
   void display() {
-    fill(colour);
+    stroke(colour);
+    fill(colour, 63);
     ellipse(x, y, radius, radius);
   }
 

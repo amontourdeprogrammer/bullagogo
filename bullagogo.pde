@@ -11,12 +11,12 @@ void setup() {
   bubbles = new ArrayList<Bubble>();
 
   for (int i = 0; i < nbBubbles; i++) {
-    bubbles.add(new Bubble(radius + 100*i, radius + 100*i,  color(240, 200), radius));
+    bubbles.add(new Bubble(radius + 100*i, radius + 100*i,  color(240), radius));
   }
 }
 
 void draw() {
-  fill(12, 12, 12, 159); // Couleur avec transparence.
+  fill(12);
   rect(0, 0, width, height);
 
   noStroke();
@@ -28,7 +28,7 @@ void draw() {
     }
   }
   nbBubbles = bubbles.size();
-  if (nbBubbles <= 100) {
+  if (nbBubbles <= 500) {
     divideBubbles();
   }
 }
@@ -54,7 +54,7 @@ void divideBubbles() {
     for (int j = i + 1; j < nbBubbles; j++) {
       float space = dist(bubbles.get(i).x, bubbles.get(i).y, bubbles.get(j).x, bubbles.get(j).y);
       if(space < radius/2) {
-        divideRadius = max(divideRadius - 2, 10);
+        divideRadius = max(divideRadius - 1.5, 30);
         divide(bubbles.get(i));
         divide(bubbles.get(j));
       }
