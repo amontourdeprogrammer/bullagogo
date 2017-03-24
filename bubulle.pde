@@ -1,42 +1,41 @@
-class Bubulle {
-	//Déclaration des paramètres de base de la balle
-	float x;
-	float y;
-	float vitesseX;
-	float vitesseY;
-	color couleur;
+class Bubble {
+	float x, y;
+	float speedX, speedY, SPEED = 2 + random(-1,1);
+	color colour;
 	int radius;
+  boolean exploded;
 
-	//Constructeur de la balle
-	Bubulle (float nouvX, float nouvY, color nouvCouleur, int nouvRadius) {
-		x = nouvX;
-		y = nouvY;
-		couleur = nouvCouleur;
-		radius =  nouvRadius;
-
-		vitesseX = 2+ random(-1,1);
-		vitesseY = 2+ random(-1,1);
+	Bubble (float newX, float newY, color newcolour, int newRadius) {
+		x = newX;
+		y = newY;
+		colour = newcolour;
+		radius =  newRadius;
+    speedX = SPEED;
+    speedY = SPEED;
+    exploded = false;
 	}
 
-	//Dessin de la balle
 	void display() {
-		fill(couleur);
+		fill(colour);
 		ellipse(x, y, radius, radius);
 	}
 
-	//Déplacement de la balle
-	void bouge() {
-		x = x + vitesseX;
-		y = y + vitesseY;
+	void move() {
+    speedX *= speedDirection(x, width);
+    speedY *= speedDirection(y, height);
+		x += speedX;
+		y += speedY;
 	}
 
-	void testCollision() {
-		//Si la balle touche un mur, elle rebondit
-		if (x > width-radius/2 || x <  radius/2) {
-			vitesseX = vitesseX * -1;
-		}
-		if (y > height-radius/2 || y < radius/2) {
-			vitesseY = vitesseY * -1;
-		}
+	float speedDirection(float position, float range) {
+		if (hitWall(position, range)) {
+      return -1;
+    } else {
+      return 1;
+    }
 	}
+
+  boolean hitWall(float pos, float rge) {
+    return (pos > rge-radius/2 || pos < radius/2);
+  }
 }

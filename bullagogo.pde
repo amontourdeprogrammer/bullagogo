@@ -1,20 +1,15 @@
-//Déclaration d'une variable contenant le nombre de balles
-int nbreBubulle = 2;
-float positionX;
-float positionY;
-int radius = 255;
-
-//Déclaration d'une liste d'instances de l'objet Balle
-Bubulle[] bubulles = new Bubulle[nbreBubulle];
+int nbBubbles, radius;
+ArrayList<Bubble> bubbles;
 
 void setup() {
-	smooth(); //Lissage des dessins
-	size(800, 600); //Taille de la fenêtre
+	size(800, 600);
 
-	//Cette boucle va créer trois balles blanches
-	//au centre de l'écran
-	for (int i = 0; i < nbreBubulle; i++) {
-		bubulles[i] = new Bubulle(radius + 100*i, radius + 100*i,  color(240), radius);
+  nbBubbles = 2;
+  radius = 255;
+  bubbles = new ArrayList<Bubble>();
+
+	for (int i = 0; i < nbBubbles; i++) {
+		bubbles.add(new Bubble(radius + 100*i, radius + 100*i,  color(240, 200), radius));
 	}
 }
 
@@ -24,18 +19,28 @@ void draw() {
 
 	noStroke();
 
-	//Cette boucle va déplacer et afficher les trois balles
-	for (int i = 0; i < nbreBubulle; i++) {
-		bubulles[i].bouge();
-		bubulles[i].testCollision();
-		bubulles[i].display();
+	for (int i = 0; i < bubbles.size(); i++) {
+		if (!bubbles.get(i).exploded) {
+      bubbles.get(i).move();
+		  bubbles.get(i).display();
+    }
 	}
-  
-  for (int i = 0; i < nbreBubulle; i++) {
-		for (int j = i + 1; j < nbreBubulle; j++) {
-      float space = dist(bubulles[i].x, bubulles[i].y, bubulles[j].x, bubulles[j].y);
+  nbBubbles = bubbles.size();
+  for (int i = 0; i < nbBubbles; i++) {
+		for (int j = i + 1; j < nbBubbles; j++) {
+      float space = dist(bubbles.get(i).x, bubbles.get(i).y, bubbles.get(j).x, bubbles.get(j).y);
 			if(space < radius/2) {
-				explosion();
+          if (!bubbles.get(i).exploded) {
+            bubbles.get(i).exploded = true;
+            bubbles.add(new Bubble(random(0, width), random(0,height), color(random(0, 255),random(0, 255),random(0, 255)), radius));
+            bubbles.add(new Bubble(random(0, width), random(0,height), color(random(0, 255),random(0, 255),random(0, 255)), radius));
+          }
+          if (!bubbles.get(j).exploded) {
+            bubbles.get(j).exploded = true;
+            bubbles.add(new Bubble(random(0, width), random(0,height), color(random(0, 255),random(0, 255),random(0, 255)), radius));
+            bubbles.add(new Bubble(random(0, width), random(0,height), color(random(0, 255),random(0, 255),random(0, 255)), radius));
+          }          
+          //explosion();    
 			}
 		}
 	}
@@ -47,7 +52,15 @@ void draw() {
 }
 
 void explosion() {
-	for (int i = 0; i < nbreBubulle; i++) {
-		bubulles[i] = new Bubulle(radius + 100*i, radius + 100*i,  color(random(0, 255),random(0, 255),random(0, 255)), radius);
-	}
+  //bubbles.add(new Bubble(0, 0,  color(random(0, 255),random(0, 255),random(0, 255)), radius));
+	//for (int i = 0; i < nbBubbles; i++) {
+  //  bubbles.get(i).radius -= 10;
+  //  bubbles.add(new Bubble(radius + 100*i, radius + 100*i,  color(random(0, 255),random(0, 255),random(0, 255)), radius));
+	//}
+  for (int i = 0; i < nbBubbles; i++) {
+    bubbles.get(i).colour = color(random(0, 255), random(0, 255), random(0, 255));
+    bubbles.get(i).speedX *= -1;
+    bubbles.get(i).speedY *= -1;
+  }
+
 }
