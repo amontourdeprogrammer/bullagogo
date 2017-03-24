@@ -2,10 +2,10 @@ class Bubble {
 	float x, y;
 	float speedX, speedY, SPEED = 2 + random(-1,1);
 	color colour;
-	int radius;
+	float radius;
   boolean exploded;
 
-	Bubble (float newX, float newY, color newcolour, int newRadius) {
+	Bubble (float newX, float newY, color newcolour, float newRadius) {
 		x = newX;
 		y = newY;
 		colour = newcolour;

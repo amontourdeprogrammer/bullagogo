@@ -1,4 +1,5 @@
-int nbBubbles, radius;
+int nbBubbles;
+float radius, divideRadius;
 ArrayList<Bubble> bubbles;
 
 void setup() {
@@ -6,6 +7,7 @@ void setup() {
 
   nbBubbles = 2;
   radius = 255;
+  divideRadius = radius;
   bubbles = new ArrayList<Bubble>();
 
 	for (int i = 0; i < nbBubbles; i++) {
@@ -30,37 +32,26 @@ void draw() {
 		for (int j = i + 1; j < nbBubbles; j++) {
       float space = dist(bubbles.get(i).x, bubbles.get(i).y, bubbles.get(j).x, bubbles.get(j).y);
 			if(space < radius/2) {
-          if (!bubbles.get(i).exploded) {
-            bubbles.get(i).exploded = true;
-            bubbles.add(new Bubble(random(0, width), random(0,height), color(random(0, 255),random(0, 255),random(0, 255)), radius));
-            bubbles.add(new Bubble(random(0, width), random(0,height), color(random(0, 255),random(0, 255),random(0, 255)), radius));
-          }
-          if (!bubbles.get(j).exploded) {
-            bubbles.get(j).exploded = true;
-            bubbles.add(new Bubble(random(0, width), random(0,height), color(random(0, 255),random(0, 255),random(0, 255)), radius));
-            bubbles.add(new Bubble(random(0, width), random(0,height), color(random(0, 255),random(0, 255),random(0, 255)), radius));
-          }          
-          //explosion();    
+         // divideRadius = min(divideRadius - 2, 10);
+          divide(bubbles.get(i));
+          divide(bubbles.get(j));           
 			}
 		}
 	}
-
-	if (mousePressed){
-		explosion();
-	}
-
 }
 
-void explosion() {
-  //bubbles.add(new Bubble(0, 0,  color(random(0, 255),random(0, 255),random(0, 255)), radius));
-	//for (int i = 0; i < nbBubbles; i++) {
-  //  bubbles.get(i).radius -= 10;
-  //  bubbles.add(new Bubble(radius + 100*i, radius + 100*i,  color(random(0, 255),random(0, 255),random(0, 255)), radius));
-	//}
+/*void explosion() {
   for (int i = 0; i < nbBubbles; i++) {
     bubbles.get(i).colour = color(random(0, 255), random(0, 255), random(0, 255));
     bubbles.get(i).speedX *= -1;
     bubbles.get(i).speedY *= -1;
   }
-
+}
+*/
+void divide(Bubble b){
+  if (!b.exploded) {
+    b.exploded = true;
+    bubbles.add(new Bubble(random(0, width), random(0,height), color(random(0, 255),random(0, 255),random(0, 255)), divideRadius));
+    bubbles.add(new Bubble(random(0, width), random(0,height), color(random(0, 255),random(0, 255),random(0, 255)), divideRadius));
+   }
 }
