@@ -16,6 +16,7 @@ class Bubble {
   }
 
   void display() {
+    ellipseMode(RADIUS);
     stroke(colour);
     fill(colour, 63);
     ellipse(x, y, radius, radius);
@@ -37,6 +38,6 @@ class Bubble {
   }
 
   boolean hitWall(float pos, float rge) {
-    return (pos > rge-radius/2 || pos < radius/2);
+    return (pos >= rge-radius || pos <= radius);
   }
 }
