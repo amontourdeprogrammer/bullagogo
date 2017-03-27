@@ -19,8 +19,8 @@ void setup() {
 
 void draw() {
   fill(12);
-  rect(0, 0, width, height);
   noStroke();
+  rect(0, 0, width, height);
 
   for (Bubble b : bubbles) {
     if (!b.exploded) {
@@ -54,8 +54,8 @@ void splitBubble(Bubble b){
   if (!b.exploded && (millis() - timeElapsed) > 500) {
       b.exploded = true;
       b.position.set(0, 0);
-      bubbles.add(new Bubble(3*b.radius, random(height), color(random(0, 255),random(0, 255),random(0, 255)), smallRadius));
-      bubbles.add(new Bubble(random(width), 3*b.radius, color(random(0, 255),random(0, 255),random(0, 255)), smallRadius));
+      bubbles.add(new Bubble(random(radius,width-radius), random(radius, height-radius), color(random(0, 255),random(0, 255),random(0, 255)), smallRadius));
+      bubbles.add(new Bubble(random(radius,width-radius), random(radius, height-radius), color(random(0, 255),random(0, 255),random(0, 255)), smallRadius));
       timeElapsed = millis();
   }
 }

@@ -21,20 +21,35 @@ class Bubble {
   }
 
   void move() {
-    speed.x *= speedDirection(position.x, width);
-    speed.y *= speedDirection(position.y, height);
+    checkWallHits();
     position.add(speed);
   }
 
-  float speedDirection(float position, float range) {
-    if (hitWall(position, range)) {
+  void checkWallHits() {
+    position.set(offsetFromWall(position.x, width),offsetFromWall(position.y, height));
+    speed.x *= speedDirection(position.x, width);
+    speed.y *= speedDirection(position.y, height);
+  }
+
+  float speedDirection(float coordinate, float range) {
+    if (hitWall(coordinate, range)) {
       return -1;
     } else {
       return 1;
     }
   }
 
-  boolean hitWall(float pos, float rge) {
-    return (pos >= rge-radius || pos <= radius);
+  float offsetFromWall(float coordinate, float range) {
+    if (coordinate >= range-radius) {
+      return range-radius;
+    } else if (coordinate <= radius) {
+      return radius;
+    } else {
+      return coordinate;
+    }
+  }
+
+  boolean hitWall(float coor, float rge) {
+    return (coor >= rge-radius || coor <= radius);
   }
 }
