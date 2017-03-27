@@ -1,17 +1,15 @@
 class Bubble {
-  float x, y;
-  float speedX, speedY, SPEED = 2 + random(-1,1);
+  PVector position, speed;
+  float SPEED = 2 + random(-1,1);
   color colour;
   float radius;
   boolean exploded;
 
   Bubble (float newX, float newY, color newColour, float newRadius) {
-    x = newX;
-    y = newY;
+    position = new PVector(newX, newY);
+    speed = new PVector(SPEED, SPEED);
     colour = newColour;
     radius =  newRadius;
-    speedX = SPEED;
-    speedY = SPEED;
     exploded = false;
   }
 
@@ -19,14 +17,13 @@ class Bubble {
     ellipseMode(RADIUS);
     stroke(colour);
     fill(colour, 63);
-    ellipse(x, y, radius, radius);
+    ellipse(position.x, position.y, radius, radius);
   }
 
   void move() {
-    speedX *= speedDirection(x, width);
-    speedY *= speedDirection(y, height);
-    x += speedX;
-    y += speedY;
+    speed.x *= speedDirection(position.x, width);
+    speed.y *= speedDirection(position.y, height);
+    position.add(speed);
   }
 
   float speedDirection(float position, float range) {
