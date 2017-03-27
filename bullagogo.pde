@@ -22,11 +22,11 @@ void draw() {
   rect(0, 0, width, height);
   noStroke();
 
-  for (int i = 0; i < bubbles.size(); i++) {    
-    if (!bubbles.get(i).exploded) {
-      bubbles.get(i).display();
-      bubbles.get(i).move();
-    } 
+  for (Bubble b : bubbles) {
+    if (!b.exploded) {
+      b.display();
+      b.move();
+    }
   }
   nbBubbles = bubbles.size();
   //print(nbBubbles);
@@ -47,7 +47,7 @@ void divideBubbles() {
         radius = divideRadius;
       }
     }
-  } 
+  }
 }
 
 void divide(Bubble b){
